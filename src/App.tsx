@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   captureRows,
   documentModules,
@@ -103,6 +103,18 @@ const ScheduleModal = ({
   onDateChange: (value: string) => void;
   onConfirm: () => void;
 }) => {
+  const dateInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (!isOpen || !dateInputRef.current) return;
+
+    const input = dateInputRef.current;
+    input.focus();
+    if ("showPicker" in input) {
+      input.showPicker();
+    }
+  }, [isOpen]);
+
   if (!isOpen) return null;
 
   return (
@@ -123,17 +135,32 @@ const ScheduleModal = ({
         </div>
 
         <p className="mt-2 text-sm text-gray-400">
-          Selecione uma data para a demonstração. Ao confirmar, abriremos o
-          WhatsApp com a mensagem pronta.
+          Clique em "Abrir calendário", selecione a data e confirme para abrir o
+          WhatsApp com a mensagem pronta incluindo o dia escolhido.
         </p>
 
-        <div className="mt-4">
+        <div className="mt-4 flex flex-col gap-3">
+          <button
+            type="button"
+            onClick={() => dateInputRef.current?.showPicker?.()}
+            className="inline-flex items-center justify-center gap-2 rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold text-gray-100 transition hover:bg-white/10"
+          >
+            <i className="fa-solid fa-calendar-days"></i> Abrir calendário
+          </button>
           <input
+            ref={dateInputRef}
             type="date"
             value={selectedDate}
+            min={new Date().toISOString().split("T")[0]}
             onChange={(event) => onDateChange(event.target.value)}
             className="w-full rounded-lg border border-white/10 bg-[#111] px-4 py-3 text-white focus:border-[#7C3AED] focus:outline-none"
           />
+          {selectedDate && (
+            <p className="text-xs text-gray-300">
+              Mensagem pronta: "Olá! Tenho interesse nas soluções de automação + IA da Atlas.AI.
+              Gostaria de agendar uma demonstração para {formatDate(selectedDate)}."
+            </p>
+          )}
         </div>
 
         <div className="mt-6 flex flex-col gap-3">
