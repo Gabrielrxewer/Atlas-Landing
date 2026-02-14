@@ -14,8 +14,10 @@ type SectionNode = {
   children?: SectionNode[];
 };
 
-const WHATSAPP_NUMBER = "554991850177";
+const WHATSAPP_NUMBER = "5549991850177";
 const BASE_WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}`;
+const DEFAULT_WHATSAPP_MESSAGE =
+  "Olá! Tenho interesse nas soluções de automação + IA da Atlas.AI e gostaria de entender a melhor opção para o meu negócio.";
 
 const formatDate = (value: string) => {
   if (!value) return "";
@@ -28,6 +30,24 @@ const formatDate = (value: string) => {
 const buildWhatsappLink = (message?: string) => {
   if (!message) return BASE_WHATSAPP_LINK;
   return `${BASE_WHATSAPP_LINK}?text=${encodeURIComponent(message)}`;
+};
+
+const estimateHoursLabel = (price: string) => {
+  const matches = Array.from(price.matchAll(/(\d+(?:[.,]\d+)?)k/gi)).map((match) =>
+    Number(match[1].replace(",", "."))
+  );
+
+  if (!matches.length) return "Sob análise";
+
+  const hourlyRate = 200;
+  const convertToHours = (valueInThousands: number) =>
+    Math.round((valueInThousands * 1000) / hourlyRate);
+
+  if (matches.length === 1) {
+    return `≈ ${convertToHours(matches[0])}h`;
+  }
+
+  return `≈ ${convertToHours(matches[0])}h a ${convertToHours(matches[1])}h`;
 };
 
 const ScheduleButton = ({
@@ -52,7 +72,7 @@ const WhatsAppButton = ({
   className: string;
 }) => (
   <a
-    href={BASE_WHATSAPP_LINK}
+    href={buildWhatsappLink(DEFAULT_WHATSAPP_MESSAGE)}
     className={className}
     target="_blank"
     rel="noreferrer"
@@ -866,9 +886,7 @@ const App = () => {
                       <tr>
                         <th style={{ width: "40%" }}>Tipo de Integração</th>
                         <th style={{ width: "25%" }}>Complexidade</th>
-                        <th style={{ width: "35%", textAlign: "right" }}>
-                          Incremento (Setup)
-                        </th>
+                        <th style={{ width: "35%", textAlign: "right" }}>Estimativa (horas)</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -880,7 +898,7 @@ const App = () => {
                               {row.level}
                             </span>
                           </td>
-                          <td style={{ textAlign: "right" }}>{row.price}</td>
+                          <td style={{ textAlign: "right" }}>{estimateHoursLabel(row.price)}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -901,7 +919,7 @@ const App = () => {
                         <tr>
                           <th>Entrada</th>
                           <th>Nível</th>
-                          <th style={{ textAlign: "right" }}>Incremento</th>
+                          <th style={{ textAlign: "right" }}>Estimativa (horas)</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -913,7 +931,7 @@ const App = () => {
                                 {row.level}
                               </span>
                             </td>
-                            <td style={{ textAlign: "right" }}>{row.price}</td>
+                            <td style={{ textAlign: "right" }}>{estimateHoursLabel(row.price)}</td>
                           </tr>
                         ))}
                       </tbody>
@@ -1021,9 +1039,7 @@ const App = () => {
                       <tr>
                         <th style={{ width: "45%" }}>Módulo de Documento</th>
                         <th style={{ width: "20%" }}>Complexidade</th>
-                        <th style={{ width: "35%", textAlign: "right" }}>
-                          Incremento (Setup)
-                        </th>
+                        <th style={{ width: "35%", textAlign: "right" }}>Estimativa (horas)</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -1045,7 +1061,7 @@ const App = () => {
                           <td>
                             <span className={`tag ${row.tagClass}`}>{row.tag}</span>
                           </td>
-                          <td>{row.price}</td>
+                          <td style={{ textAlign: "right" }}>{estimateHoursLabel(row.price)}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -1170,9 +1186,7 @@ const App = () => {
                       <tr>
                         <th style={{ width: "45%" }}>Módulo Enterprise</th>
                         <th style={{ width: "20%" }}>Impacto</th>
-                        <th style={{ width: "35%", textAlign: "right" }}>
-                          Incremento (Setup)
-                        </th>
+                        <th style={{ width: "35%", textAlign: "right" }}>Estimativa (horas)</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -1194,7 +1208,7 @@ const App = () => {
                           <td>
                             <span className={`tag ${row.tagClass}`}>{row.tag}</span>
                           </td>
-                          <td>{row.price}</td>
+                          <td style={{ textAlign: "right" }}>{estimateHoursLabel(row.price)}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -1513,7 +1527,7 @@ const App = () => {
   const handleConfirmSchedule = () => {
     if (!selectedDate) return;
     const formatted = formatDate(selectedDate);
-    const message = `Olá! Gostaria de agendar uma demonstração para ${formatted}.`;
+    const message = `Olá! Tenho interesse nas soluções de automação + IA da Atlas.AI. Gostaria de agendar uma demonstração para ${formatted}. Podem me passar os próximos passos?`;
     window.open(buildWhatsappLink(message), "_blank");
     setIsScheduleOpen(false);
     setSelectedDate("");
