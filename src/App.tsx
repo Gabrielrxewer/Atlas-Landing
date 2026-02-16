@@ -1350,52 +1350,6 @@ const App = () => {
         ),
       },
       {
-        id: "faq",
-        className: "relative overflow-hidden bg-[#2B0A3D]",
-        content: (
-          <>
-            <svg className="absolute inset-0 z-0 h-full w-full opacity-5" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <pattern id="grid-faq" width="40" height="40" patternUnits="userSpaceOnUse">
-                  <path d="M 40 0 L 0 0 0 40" fill="none" stroke="white" strokeWidth="0.5"></path>
-                </pattern>
-              </defs>
-              <rect width="100%" height="100%" fill="url(#grid-faq)"></rect>
-            </svg>
-
-            <div className="relative z-10 mx-auto max-w-4xl px-4 py-16 sm:px-6 md:py-20">
-              <div className="text-center">
-                <h2 className="font-montserrat text-2xl font-extrabold text-white sm:text-3xl">Dúvidas frequentes</h2>
-                <p className="mt-3 text-sm text-gray-400">Respostas rápidas para facilitar sua decisão.</p>
-              </div>
-
-              <div className="mt-8 space-y-4">
-                {[
-                  {
-                    q: "Em quanto tempo conseguimos colocar no ar?",
-                    a: "Projetos de menor complexidade entram em produção entre 3 e 6 semanas, com etapas semanais e validações junto ao time.",
-                  },
-                  {
-                    q: "Funciona em celular e desktop?",
-                    a: "Sim. O site foi modernizado com layout responsivo, rolagem suave e sessões clicáveis tanto no mobile quanto no PC.",
-                  },
-                  {
-                    q: "Preciso ter API pronta?",
-                    a: "Não necessariamente. Podemos operar com API, arquivos, banco e até estratégia híbrida conforme o cenário.",
-                  },
-                ].map((item) => (
-                  <details key={item.q} className="faq-item rounded-xl p-5">
-                    <summary className="cursor-pointer list-none font-semibold text-white">{item.q}</summary>
-                    <p className="mt-3 text-sm leading-relaxed text-gray-400">{item.a}</p>
-                  </details>
-                ))}
-              </div>
-            </div>
-          </>
-        ),
-      },
-
-      {
         id: "preco",
         className: "relative overflow-hidden bg-[#2B0A3D]",
         content: (
@@ -1615,6 +1569,53 @@ const App = () => {
           </>
         ),
       },
+      {
+        id: "faq",
+        className: "relative overflow-hidden bg-[#2B0A3D]",
+        content: (
+          <>
+            <svg className="absolute inset-0 z-0 h-full w-full opacity-5" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <pattern id="grid-faq" width="40" height="40" patternUnits="userSpaceOnUse">
+                  <path d="M 40 0 L 0 0 0 40" fill="none" stroke="white" strokeWidth="0.5"></path>
+                </pattern>
+              </defs>
+              <rect width="100%" height="100%" fill="url(#grid-faq)"></rect>
+            </svg>
+
+            <div className="relative z-10 mx-auto max-w-4xl px-4 py-16 sm:px-6 md:py-20">
+              <div className="text-center">
+                <h2 className="font-montserrat text-2xl font-extrabold text-white sm:text-3xl">Dúvidas frequentes</h2>
+                <p className="mt-3 text-sm text-gray-400">Respostas rápidas para facilitar sua decisão.</p>
+              </div>
+
+              <div className="mt-8 space-y-4">
+                {[
+                  {
+                    q: "Em quanto tempo conseguimos colocar no ar?",
+                    a: "Projetos de menor complexidade entram em produção entre 3 e 6 semanas, com etapas semanais e validações junto ao time.",
+                  },
+                  {
+                    q: "Funciona em celular e desktop?",
+                    a: "Sim. O site foi modernizado com layout responsivo, rolagem suave e sessões clicáveis tanto no mobile quanto no PC.",
+                  },
+                  {
+                    q: "Preciso ter API pronta?",
+                    a: "Não necessariamente. Podemos operar com API, arquivos, banco e até estratégia híbrida conforme o cenário.",
+                  },
+                ].map((item) => (
+                  <details key={item.q} className="faq-item rounded-xl p-5">
+                    <summary className="cursor-pointer list-none font-semibold text-white">{item.q}</summary>
+                    <p className="mt-3 text-sm leading-relaxed text-gray-400">{item.a}</p>
+                  </details>
+                ))}
+              </div>
+            </div>
+          </>
+        ),
+      },
+
+
     ],
     []
   );
@@ -1677,7 +1678,7 @@ const App = () => {
               <i className="fa-solid fa-bars text-xl"></i>
             </button>
 
-            <div className="hidden items-center gap-6 text-sm md:flex">
+            <div className="hidden items-center gap-4 text-xs lg:text-sm md:flex">
               {navItems.map((item) => (
                 <a key={item.href} className="nav-link" href={item.href}>
                   {item.label}
@@ -1688,11 +1689,10 @@ const App = () => {
             <div className="hidden items-center gap-3 md:flex">
               <ScheduleButton
                 onClick={() => setIsScheduleOpen(true)}
-                className="inline-flex items-center gap-2 rounded-lg bg-[#7C3AED] px-4 py-2 font-semibold text-white transition hover:opacity-90"
+                className="inline-flex items-center gap-2 whitespace-nowrap rounded-lg bg-[#7C3AED] px-3 py-2 text-sm font-semibold text-white transition hover:opacity-90"
               >
                 <>
-                  <i className="fa-solid fa-calendar-check"></i> Agendar
-                  demonstração
+                  <i className="fa-solid fa-calendar-check"></i> Agendar demo
                 </>
               </ScheduleButton>
               <WhatsAppButton

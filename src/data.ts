@@ -5,6 +5,7 @@ export const navItems = [
   { label: "Fluxo", href: "#fluxo" },
   { label: "Metodologia", href: "#metodologia" },
   { label: "Catálogo", href: "#catalogo-entradas" },
+  { label: "Estimativas", href: "#mapa" },
   { label: "Preço", href: "#preco" },
   { label: "FAQ", href: "#faq" },
 ];
