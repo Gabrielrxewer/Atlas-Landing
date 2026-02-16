@@ -20,6 +20,17 @@ body {
   font-family: "Montserrat", sans-serif;
 }
 
+.section-fullscreen {
+  min-height: 100vh;
+}
+
+@media (min-width: 1920px) and (min-height: 1080px) {
+  .section-fullscreen {
+    min-height: 1080px;
+  }
+}
+
+
 .glass {
   background-color: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.1);
