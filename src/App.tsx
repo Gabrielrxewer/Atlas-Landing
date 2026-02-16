@@ -17,7 +17,7 @@ type SectionNode = {
 const WHATSAPP_NUMBER = "5549991850177";
 const BASE_WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}`;
 const DEFAULT_WHATSAPP_MESSAGE =
-  "Olá! Tenho interesse nas soluções de automação + IA da Atlas.AI e gostaria de entender a melhor opção para o meu negócio.";
+  "Olá! Tenho interesse nas soluções de automação + IA da Atlas.Automate e gostaria de entender a melhor opção para o meu negócio.";
 
 const formatDate = (value: string) => {
   if (!value) return "";
@@ -82,7 +82,10 @@ const WhatsAppButton = ({
 );
 
 const SectionRenderer = ({ section }: { section: SectionNode }) => (
-  <section id={section.id} className={section.className}>
+  <section
+    id={section.id}
+    className={["section-fullscreen", section.className].filter(Boolean).join(" ")}
+  >
     {section.content}
     {section.children?.map((child, index) => (
       <SectionRenderer key={child.id ?? index} section={child} />
@@ -157,7 +160,7 @@ const ScheduleModal = ({
           />
           {selectedDate && (
             <p className="text-xs text-gray-300">
-              Mensagem pronta: "Olá! Tenho interesse nas soluções de automação + IA da Atlas.AI.
+              Mensagem pronta: "Olá! Tenho interesse nas soluções de automação + IA da Atlas.Automate.
               Gostaria de agendar uma demonstração para {formatDate(selectedDate)}."
             </p>
           )}
@@ -622,7 +625,7 @@ const App = () => {
             <div className="relative z-10 mx-auto max-w-6xl px-4 py-16 sm:px-6 md:py-20">
               <div className="mb-10 text-center">
                 <h2 className="font-montserrat text-2xl font-extrabold text-white sm:text-3xl">
-                  Metodologia Atlas
+                  Metodologia Atlas.Automate
                 </h2>
                 <p className="mt-3 text-sm text-gray-400">
                   Deploy rápido, controle total e evolução contínua.
@@ -1554,7 +1557,7 @@ const App = () => {
   const handleConfirmSchedule = () => {
     if (!selectedDate) return;
     const formatted = formatDate(selectedDate);
-    const message = `Olá! Tenho interesse nas soluções de automação + IA da Atlas.AI. Gostaria de agendar uma demonstração para ${formatted}. Podem me passar os próximos passos?`;
+    const message = `Olá! Tenho interesse nas soluções de automação + IA da Atlas.Automate. Gostaria de agendar uma demonstração para ${formatted}. Podem me passar os próximos passos?`;
     window.open(buildWhatsappLink(message), "_blank");
     setIsScheduleOpen(false);
     setSelectedDate("");
@@ -1567,10 +1570,10 @@ const App = () => {
           <div className="flex h-16 items-center justify-between gap-3">
             <a href="#hero" className="flex items-center gap-3">
               <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#7C3AED] text-white shadow-lg">
-                <i className="fa-solid fa-network-wired"></i>
+                <i className="fa-solid fa-brain"></i>
               </div>
               <div className="font-montserrat text-lg font-bold tracking-wide text-white">
-                Atlas<span className="text-[#7C3AED]">.AI</span>
+                Atlas<span className="text-[#7C3AED]">.Automate</span>
               </div>
             </a>
 
@@ -1658,10 +1661,10 @@ const App = () => {
             <div>
               <div className="mb-2 flex items-center gap-3">
                 <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#7C3AED] text-white shadow-lg">
-                  <i className="fa-solid fa-network-wired"></i>
+                  <i className="fa-solid fa-brain"></i>
                 </div>
                 <div className="font-montserrat text-lg font-bold text-white">
-                  Atlas<span className="text-[#7C3AED]">.AI</span>
+                  Atlas<span className="text-[#7C3AED]">.Automate</span>
                 </div>
               </div>
               <p className="max-w-xl text-sm text-gray-400">
@@ -1702,7 +1705,7 @@ const App = () => {
 
           <div className="mt-8 flex flex-col gap-2 border-t border-white/10 pt-6 sm:flex-row sm:justify-between">
             <p className="text-xs text-gray-500">
-              © 2026 Atlas.AI. Todos os direitos reservados.
+              © 2026 Atlas.Automate. Todos os direitos reservados.
             </p>
             <p className="text-xs text-gray-600">
               Este material não contém informações confidenciais por seção
