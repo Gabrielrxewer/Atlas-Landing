@@ -84,7 +84,7 @@ const WhatsAppButton = ({
 const SectionRenderer = ({ section }: { section: SectionNode }) => (
   <section
     id={section.id}
-    className={["section-fullscreen", section.className].filter(Boolean).join(" ")}
+    className={["section-shell", "section-fullscreen", section.className].filter(Boolean).join(" ")}
   >
     {section.content}
     {section.children?.map((child, index) => (
@@ -226,7 +226,7 @@ const App = () => {
               <rect width="100%" height="100%" fill="url(#grid-hero)"></rect>
             </svg>
 
-            <div className="relative z-10 mx-auto flex min-h-[calc(100vh-64px)] max-w-6xl items-center justify-center px-4 py-16 sm:px-6 md:py-20">
+            <div className="relative z-10 mx-auto flex min-h-[80vh] md:min-h-[calc(100vh-64px)] max-w-6xl items-center justify-center px-4 py-10 sm:px-6 md:py-14">
               <div className="grid w-full grid-cols-1 items-center gap-10 text-center md:grid-cols-12 md:text-left">
                 <div className="flex flex-col items-center gap-6 md:col-span-7 md:items-start">
                   <div className="inline-flex items-center gap-2 self-start rounded-full border border-[#7C3AED]/50 bg-[#4C1D95]/30 px-4 py-2">
@@ -382,7 +382,7 @@ const App = () => {
               <rect width="100%" height="100%" fill="url(#grid-problema)"></rect>
             </svg>
 
-            <div className="relative z-10 mx-auto max-w-6xl px-4 py-16 sm:px-6 md:py-20">
+            <div className="relative z-10 mx-auto max-w-6xl px-4 py-10 sm:px-6 md:py-14">
               <div className="mb-12 text-center">
                 <h2 className="font-montserrat text-2xl font-extrabold text-white sm:text-3xl">
                   O problema das operações manuais
@@ -468,7 +468,7 @@ const App = () => {
               <rect width="100%" height="100%" fill="url(#grid-valor)"></rect>
             </svg>
 
-            <div className="relative z-10 mx-auto max-w-6xl px-4 py-16 sm:px-6 md:py-20">
+            <div className="relative z-10 mx-auto max-w-6xl px-4 py-10 sm:px-6 md:py-14">
               <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
                 <div className="lg:col-span-5">
                   <h2 className="font-montserrat text-2xl font-extrabold text-white sm:text-3xl">
@@ -555,7 +555,7 @@ const App = () => {
               <rect width="100%" height="100%" fill="url(#grid-resultados)"></rect>
             </svg>
 
-            <div className="relative z-10 mx-auto max-w-6xl px-4 py-16 text-center sm:px-6 md:py-20">
+            <div className="relative z-10 mx-auto max-w-6xl px-4 py-10 text-center sm:px-6 md:py-14">
               <div className="mx-auto max-w-3xl">
                 <h2 className="font-montserrat text-2xl font-extrabold text-white sm:text-3xl">
                   Resultados reais para operações reais
@@ -609,7 +609,7 @@ const App = () => {
               <rect width="100%" height="100%" fill="url(#grid-fluxo)"></rect>
             </svg>
 
-            <div className="relative z-10 mx-auto max-w-6xl px-4 py-16 sm:px-6 md:py-20">
+            <div className="relative z-10 mx-auto max-w-6xl px-4 py-10 sm:px-6 md:py-14">
               <div className="mb-10 text-center">
                 <h2 className="font-montserrat text-2xl font-extrabold text-white sm:text-3xl">
                   Fluxo de entrega
@@ -667,7 +667,7 @@ const App = () => {
               <rect width="100%" height="100%" fill="url(#grid-metodo)"></rect>
             </svg>
 
-            <div className="relative z-10 mx-auto max-w-6xl px-4 py-16 sm:px-6 md:py-20">
+            <div className="relative z-10 mx-auto max-w-6xl px-4 py-10 sm:px-6 md:py-14">
               <div className="mb-10 text-center">
                 <h2 className="font-montserrat text-2xl font-extrabold text-white sm:text-3xl">
                   Metodologia Atlas.Automate
@@ -743,7 +743,7 @@ const App = () => {
                   ></rect>
                 </svg>
 
-                <div className="relative z-10 mx-auto max-w-6xl px-4 py-16 sm:px-6 md:py-20">
+                <div className="relative z-10 mx-auto max-w-6xl px-4 py-10 sm:px-6 md:py-14">
                   <div className="mb-8">
                     <h2 className="font-montserrat text-2xl font-extrabold text-white sm:text-3xl">
                       Catálogo de entradas
@@ -806,7 +806,7 @@ const App = () => {
                   ></rect>
                 </svg>
 
-                <div className="relative z-10 mx-auto max-w-6xl px-4 py-16 sm:px-6 md:py-20">
+                <div className="relative z-10 mx-auto max-w-6xl px-4 py-10 sm:px-6 md:py-14">
                   <div className="mb-8">
                     <h2 className="font-montserrat text-2xl font-extrabold text-white sm:text-3xl">
                       Catálogo de processamento
@@ -869,7 +869,7 @@ const App = () => {
                   ></rect>
                 </svg>
 
-                <div className="relative z-10 mx-auto max-w-6xl px-4 py-16 sm:px-6 md:py-20">
+                <div className="relative z-10 mx-auto max-w-6xl px-4 py-10 sm:px-6 md:py-14">
                   <div className="mb-8">
                     <h2 className="font-montserrat text-2xl font-extrabold text-white sm:text-3xl">
                       Catálogo de saídas
@@ -933,7 +933,7 @@ const App = () => {
               <rect width="100%" height="100%" fill="url(#grid-mapa)"></rect>
             </svg>
 
-            <div className="relative z-10 mx-auto max-w-6xl px-4 py-16 sm:px-6 md:py-20">
+            <div className="relative z-10 mx-auto max-w-6xl px-4 py-10 sm:px-6 md:py-14">
               <div className="mb-8">
                 <h2 className="font-montserrat text-2xl font-bold text-white sm:text-3xl">
                   Quanto custa integrar?{" "}
@@ -1088,7 +1088,7 @@ const App = () => {
               <rect width="100%" height="100%" fill="url(#grid-mod-ia)"></rect>
             </svg>
 
-            <div className="relative z-10 mx-auto max-w-6xl px-4 py-16 sm:px-6 md:py-20">
+            <div className="relative z-10 mx-auto max-w-6xl px-4 py-10 sm:px-6 md:py-14">
               <div className="mb-6 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
                 <div>
                   <h2 className="font-montserrat text-2xl font-extrabold text-white sm:text-3xl">
@@ -1235,7 +1235,7 @@ const App = () => {
               <rect width="100%" height="100%" fill="url(#grid-enterprise)"></rect>
             </svg>
 
-            <div className="relative z-10 mx-auto max-w-6xl px-4 py-16 sm:px-6 md:py-20">
+            <div className="relative z-10 mx-auto max-w-6xl px-4 py-10 sm:px-6 md:py-14">
               <div className="mb-6 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
                 <div>
                   <h2 className="font-montserrat text-2xl font-extrabold text-white sm:text-3xl">
@@ -1385,7 +1385,7 @@ const App = () => {
               <rect width="100%" height="100%" fill="url(#grid-preco)"></rect>
             </svg>
 
-            <div className="relative z-10 mx-auto max-w-6xl px-4 py-16 sm:px-6 md:py-20">
+            <div className="relative z-10 mx-auto max-w-6xl px-4 py-10 sm:px-6 md:py-14">
               <div className="mb-8">
                 <h2 className="font-montserrat text-2xl font-extrabold text-white sm:text-3xl">
                   Como cobramos?{" "}
@@ -1583,7 +1583,7 @@ const App = () => {
               <rect width="100%" height="100%" fill="url(#grid-faq)"></rect>
             </svg>
 
-            <div className="relative z-10 mx-auto max-w-4xl px-4 py-16 sm:px-6 md:py-20">
+            <div className="relative z-10 mx-auto max-w-4xl px-4 py-10 sm:px-6 md:py-14">
               <div className="text-center">
                 <h2 className="font-montserrat text-2xl font-extrabold text-white sm:text-3xl">Dúvidas frequentes</h2>
                 <p className="mt-3 text-sm text-gray-400">Respostas rápidas para facilitar sua decisão.</p>
