@@ -22,6 +22,12 @@ body {
 
 .section-fullscreen {
   min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+.section-fullscreen > * {
+  width: 100%;
 }
 
 @media (min-width: 1920px) and (min-height: 1080px) {
