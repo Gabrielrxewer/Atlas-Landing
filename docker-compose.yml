@@ -1,0 +1,17 @@
+services:
+  web:
+    build: .
+    container_name: atlas_web
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+
+  # OPCIONAL: cloudflared via token
+  # Se você quiser só testar local primeiro, pode comentar este serviço.
+  tunnel:
+    image: cloudflare/cloudflared:latest
+    container_name: atlas_tunnel
+    restart: unless-stopped
+    depends_on:
+      - web
+    command: tunnel --no-autoupdate run --token ${TUNNEL_TOKEN}
