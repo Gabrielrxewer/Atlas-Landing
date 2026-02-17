@@ -17,7 +17,7 @@ type SectionNode = {
 const WHATSAPP_NUMBER = "5549991850177";
 const BASE_WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}`;
 const DEFAULT_WHATSAPP_MESSAGE =
-  "Olá! Tenho interesse nas soluções de automação + IA da Atlas.AI e gostaria de entender a melhor opção para o meu negócio.";
+  "Olá! Tenho interesse nas soluções de automação + IA da Atlas.Automate e gostaria de entender a melhor opção para o meu negócio.";
 
 const formatDate = (value: string) => {
   if (!value) return "";
@@ -82,7 +82,10 @@ const WhatsAppButton = ({
 );
 
 const SectionRenderer = ({ section }: { section: SectionNode }) => (
-  <section id={section.id} className={section.className}>
+  <section
+    id={section.id}
+    className={["section-shell", "section-fullscreen", section.className].filter(Boolean).join(" ")}
+  >
     {section.content}
     {section.children?.map((child, index) => (
       <SectionRenderer key={child.id ?? index} section={child} />
@@ -157,7 +160,7 @@ const ScheduleModal = ({
           />
           {selectedDate && (
             <p className="text-xs text-gray-300">
-              Mensagem pronta: "Olá! Tenho interesse nas soluções de automação + IA da Atlas.AI.
+              Mensagem pronta: "Olá! Tenho interesse nas soluções de automação + IA da Atlas.Automate.
               Gostaria de agendar uma demonstração para {formatDate(selectedDate)}."
             </p>
           )}
@@ -190,6 +193,7 @@ const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScheduleOpen, setIsScheduleOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState("");
+  const [activeSectionId, setActiveSectionId] = useState(navItems[0]?.href.replace("#", "") ?? "hero");
 
   const sections = useMemo<SectionNode[]>(
     () => [
@@ -222,9 +226,9 @@ const App = () => {
               <rect width="100%" height="100%" fill="url(#grid-hero)"></rect>
             </svg>
 
-            <div className="relative z-10 mx-auto flex min-h-[calc(100vh-64px)] max-w-6xl items-center px-4 py-16 sm:px-6 md:py-20">
-              <div className="grid w-full grid-cols-1 items-center gap-10 md:grid-cols-12">
-                <div className="flex flex-col gap-6 md:col-span-7">
+            <div className="relative z-10 mx-auto flex min-h-[80vh] md:min-h-[calc(100vh-64px)] max-w-6xl items-center justify-center px-4 py-10 sm:px-6 md:py-14">
+              <div className="grid w-full grid-cols-1 items-center gap-10 text-center md:grid-cols-12 md:text-left">
+                <div className="flex flex-col items-center gap-6 md:col-span-7 md:items-start">
                   <div className="inline-flex items-center gap-2 self-start rounded-full border border-[#7C3AED]/50 bg-[#4C1D95]/30 px-4 py-2">
                     <span className="h-2 w-2 animate-pulse rounded-full bg-[#A78BFA]"></span>
                     <p className="m-0 text-xs font-extrabold uppercase tracking-wider text-[#A78BFA]">
@@ -242,13 +246,13 @@ const App = () => {
                     </h2>
                   </div>
 
-                  <p className="mt-1 max-w-2xl border-l-4 border-[#7C3AED] pl-6 text-lg leading-relaxed text-gray-300 sm:text-xl">
+                  <p className="mt-1 max-w-2xl border-l-4 border-[#7C3AED] pl-6 text-lg leading-relaxed text-gray-300 sm:text-xl md:text-left">
                     Transformamos processos manuais repetitivos em fluxos digitais
                     inteligentes, auditáveis e escaláveis. Do WhatsApp ao ERP, em
                     minutos.
                   </p>
 
-                  <div className="mt-4 flex flex-col gap-3 sm:flex-row">
+                  <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:justify-center md:justify-start">
                     <ScheduleButton
                       onClick={() => setIsScheduleOpen(true)}
                       className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#7C3AED] px-5 py-3 font-semibold text-white transition hover:opacity-90"
@@ -264,7 +268,7 @@ const App = () => {
                     />
                   </div>
 
-                  <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
+                  <div className="mt-6 grid w-full grid-cols-1 gap-4 text-center sm:grid-cols-3 md:text-left">
                     <div className="flex flex-col gap-1">
                       <span className="text-lg font-bold text-[#7C3AED]">
                         <i className="fa-solid fa-check-circle mr-2"></i>Sem
@@ -378,7 +382,7 @@ const App = () => {
               <rect width="100%" height="100%" fill="url(#grid-problema)"></rect>
             </svg>
 
-            <div className="relative z-10 mx-auto max-w-6xl px-4 py-16 sm:px-6 md:py-20">
+            <div className="relative z-10 mx-auto max-w-6xl px-4 py-10 sm:px-6 md:py-14">
               <div className="mb-12 text-center">
                 <h2 className="font-montserrat text-2xl font-extrabold text-white sm:text-3xl">
                   O problema das operações manuais
@@ -464,7 +468,7 @@ const App = () => {
               <rect width="100%" height="100%" fill="url(#grid-valor)"></rect>
             </svg>
 
-            <div className="relative z-10 mx-auto max-w-6xl px-4 py-16 sm:px-6 md:py-20">
+            <div className="relative z-10 mx-auto max-w-6xl px-4 py-10 sm:px-6 md:py-14">
               <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
                 <div className="lg:col-span-5">
                   <h2 className="font-montserrat text-2xl font-extrabold text-white sm:text-3xl">
@@ -535,6 +539,50 @@ const App = () => {
         ),
       },
       {
+        id: "resultados",
+        className: "relative overflow-hidden bg-[#2B0A3D]",
+        content: (
+          <>
+            <svg
+              className="absolute inset-0 z-0 h-full w-full opacity-5"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <defs>
+                <pattern id="grid-resultados" width="40" height="40" patternUnits="userSpaceOnUse">
+                  <path d="M 40 0 L 0 0 0 40" fill="none" stroke="white" strokeWidth="0.5"></path>
+                </pattern>
+              </defs>
+              <rect width="100%" height="100%" fill="url(#grid-resultados)"></rect>
+            </svg>
+
+            <div className="relative z-10 mx-auto max-w-6xl px-4 py-10 text-center sm:px-6 md:py-14">
+              <div className="mx-auto max-w-3xl">
+                <h2 className="font-montserrat text-2xl font-extrabold text-white sm:text-3xl">
+                  Resultados reais para operações reais
+                </h2>
+                <p className="mt-3 text-sm text-gray-400 sm:text-base">
+                  Projetos desenhados para reduzir esforço manual, aumentar previsibilidade e acelerar o crescimento com segurança.
+                </p>
+              </div>
+
+              <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                {[
+                  { value: "-58%", label: "menos retrabalho" },
+                  { value: "+2.7x", label: "mais produtividade" },
+                  { value: "< 90 dias", label: "time-to-value médio" },
+                  { value: "NPS 9.2", label: "satisfação de operações" },
+                ].map((item) => (
+                  <div key={item.label} className="result-card rounded-2xl p-6">
+                    <p className="font-montserrat text-3xl font-extrabold text-white">{item.value}</p>
+                    <p className="mt-2 text-sm text-gray-400">{item.label}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </>
+        ),
+      },
+      {
         id: "fluxo",
         className: "relative overflow-hidden bg-[#2B0A3D]",
         content: (
@@ -561,7 +609,7 @@ const App = () => {
               <rect width="100%" height="100%" fill="url(#grid-fluxo)"></rect>
             </svg>
 
-            <div className="relative z-10 mx-auto max-w-6xl px-4 py-16 sm:px-6 md:py-20">
+            <div className="relative z-10 mx-auto max-w-6xl px-4 py-10 sm:px-6 md:py-14">
               <div className="mb-10 text-center">
                 <h2 className="font-montserrat text-2xl font-extrabold text-white sm:text-3xl">
                   Fluxo de entrega
@@ -619,10 +667,10 @@ const App = () => {
               <rect width="100%" height="100%" fill="url(#grid-metodo)"></rect>
             </svg>
 
-            <div className="relative z-10 mx-auto max-w-6xl px-4 py-16 sm:px-6 md:py-20">
+            <div className="relative z-10 mx-auto max-w-6xl px-4 py-10 sm:px-6 md:py-14">
               <div className="mb-10 text-center">
                 <h2 className="font-montserrat text-2xl font-extrabold text-white sm:text-3xl">
-                  Metodologia Atlas
+                  Metodologia Atlas.Automate
                 </h2>
                 <p className="mt-3 text-sm text-gray-400">
                   Deploy rápido, controle total e evolução contínua.
@@ -695,7 +743,7 @@ const App = () => {
                   ></rect>
                 </svg>
 
-                <div className="relative z-10 mx-auto max-w-6xl px-4 py-16 sm:px-6 md:py-20">
+                <div className="relative z-10 mx-auto max-w-6xl px-4 py-10 sm:px-6 md:py-14">
                   <div className="mb-8">
                     <h2 className="font-montserrat text-2xl font-extrabold text-white sm:text-3xl">
                       Catálogo de entradas
@@ -758,7 +806,7 @@ const App = () => {
                   ></rect>
                 </svg>
 
-                <div className="relative z-10 mx-auto max-w-6xl px-4 py-16 sm:px-6 md:py-20">
+                <div className="relative z-10 mx-auto max-w-6xl px-4 py-10 sm:px-6 md:py-14">
                   <div className="mb-8">
                     <h2 className="font-montserrat text-2xl font-extrabold text-white sm:text-3xl">
                       Catálogo de processamento
@@ -821,7 +869,7 @@ const App = () => {
                   ></rect>
                 </svg>
 
-                <div className="relative z-10 mx-auto max-w-6xl px-4 py-16 sm:px-6 md:py-20">
+                <div className="relative z-10 mx-auto max-w-6xl px-4 py-10 sm:px-6 md:py-14">
                   <div className="mb-8">
                     <h2 className="font-montserrat text-2xl font-extrabold text-white sm:text-3xl">
                       Catálogo de saídas
@@ -885,7 +933,7 @@ const App = () => {
               <rect width="100%" height="100%" fill="url(#grid-mapa)"></rect>
             </svg>
 
-            <div className="relative z-10 mx-auto max-w-6xl px-4 py-16 sm:px-6 md:py-20">
+            <div className="relative z-10 mx-auto max-w-6xl px-4 py-10 sm:px-6 md:py-14">
               <div className="mb-8">
                 <h2 className="font-montserrat text-2xl font-bold text-white sm:text-3xl">
                   Quanto custa integrar?{" "}
@@ -1040,7 +1088,7 @@ const App = () => {
               <rect width="100%" height="100%" fill="url(#grid-mod-ia)"></rect>
             </svg>
 
-            <div className="relative z-10 mx-auto max-w-6xl px-4 py-16 sm:px-6 md:py-20">
+            <div className="relative z-10 mx-auto max-w-6xl px-4 py-10 sm:px-6 md:py-14">
               <div className="mb-6 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
                 <div>
                   <h2 className="font-montserrat text-2xl font-extrabold text-white sm:text-3xl">
@@ -1187,7 +1235,7 @@ const App = () => {
               <rect width="100%" height="100%" fill="url(#grid-enterprise)"></rect>
             </svg>
 
-            <div className="relative z-10 mx-auto max-w-6xl px-4 py-16 sm:px-6 md:py-20">
+            <div className="relative z-10 mx-auto max-w-6xl px-4 py-10 sm:px-6 md:py-14">
               <div className="mb-6 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
                 <div>
                   <h2 className="font-montserrat text-2xl font-extrabold text-white sm:text-3xl">
@@ -1337,7 +1385,7 @@ const App = () => {
               <rect width="100%" height="100%" fill="url(#grid-preco)"></rect>
             </svg>
 
-            <div className="relative z-10 mx-auto max-w-6xl px-4 py-16 sm:px-6 md:py-20">
+            <div className="relative z-10 mx-auto max-w-6xl px-4 py-10 sm:px-6 md:py-14">
               <div className="mb-8">
                 <h2 className="font-montserrat text-2xl font-extrabold text-white sm:text-3xl">
                   Como cobramos?{" "}
@@ -1521,6 +1569,53 @@ const App = () => {
           </>
         ),
       },
+      {
+        id: "faq",
+        className: "relative overflow-hidden bg-[#2B0A3D]",
+        content: (
+          <>
+            <svg className="absolute inset-0 z-0 h-full w-full opacity-5" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <pattern id="grid-faq" width="40" height="40" patternUnits="userSpaceOnUse">
+                  <path d="M 40 0 L 0 0 0 40" fill="none" stroke="white" strokeWidth="0.5"></path>
+                </pattern>
+              </defs>
+              <rect width="100%" height="100%" fill="url(#grid-faq)"></rect>
+            </svg>
+
+            <div className="relative z-10 mx-auto max-w-4xl px-4 py-10 sm:px-6 md:py-14">
+              <div className="text-center">
+                <h2 className="font-montserrat text-2xl font-extrabold text-white sm:text-3xl">Dúvidas frequentes</h2>
+                <p className="mt-3 text-sm text-gray-400">Respostas rápidas para facilitar sua decisão.</p>
+              </div>
+
+              <div className="mt-8 space-y-4">
+                {[
+                  {
+                    q: "Em quanto tempo conseguimos colocar no ar?",
+                    a: "Projetos de menor complexidade entram em produção entre 3 e 6 semanas, com etapas semanais e validações junto ao time.",
+                  },
+                  {
+                    q: "Funciona em celular e desktop?",
+                    a: "Sim. O site foi modernizado com layout responsivo, rolagem suave e sessões clicáveis tanto no mobile quanto no PC.",
+                  },
+                  {
+                    q: "Preciso ter API pronta?",
+                    a: "Não necessariamente. Podemos operar com API, arquivos, banco e até estratégia híbrida conforme o cenário.",
+                  },
+                ].map((item) => (
+                  <details key={item.q} className="faq-item rounded-xl p-5">
+                    <summary className="cursor-pointer list-none font-semibold text-white">{item.q}</summary>
+                    <p className="mt-3 text-sm leading-relaxed text-gray-400">{item.a}</p>
+                  </details>
+                ))}
+              </div>
+            </div>
+          </>
+        ),
+      },
+
+
     ],
     []
   );
@@ -1540,6 +1635,7 @@ const App = () => {
               (link) => link.getAttribute("href") === `#${entry.target.id}`
             );
             if (active) active.classList.add("active");
+            setActiveSectionId(entry.target.id);
           }
         });
       },
@@ -1554,7 +1650,7 @@ const App = () => {
   const handleConfirmSchedule = () => {
     if (!selectedDate) return;
     const formatted = formatDate(selectedDate);
-    const message = `Olá! Tenho interesse nas soluções de automação + IA da Atlas.AI. Gostaria de agendar uma demonstração para ${formatted}. Podem me passar os próximos passos?`;
+    const message = `Olá! Tenho interesse nas soluções de automação + IA da Atlas.Automate. Gostaria de agendar uma demonstração para ${formatted}. Podem me passar os próximos passos?`;
     window.open(buildWhatsappLink(message), "_blank");
     setIsScheduleOpen(false);
     setSelectedDate("");
@@ -1567,10 +1663,10 @@ const App = () => {
           <div className="flex h-16 items-center justify-between gap-3">
             <a href="#hero" className="flex items-center gap-3">
               <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#7C3AED] text-white shadow-lg">
-                <i className="fa-solid fa-network-wired"></i>
+                <i className="fa-solid fa-brain"></i>
               </div>
               <div className="font-montserrat text-lg font-bold tracking-wide text-white">
-                Atlas<span className="text-[#7C3AED]">.AI</span>
+                Atlas<span className="text-[#7C3AED]">.Automate</span>
               </div>
             </a>
 
@@ -1582,7 +1678,7 @@ const App = () => {
               <i className="fa-solid fa-bars text-xl"></i>
             </button>
 
-            <div className="hidden items-center gap-6 text-sm md:flex">
+            <div className="hidden items-center gap-4 text-xs lg:text-sm md:flex">
               {navItems.map((item) => (
                 <a key={item.href} className="nav-link" href={item.href}>
                   {item.label}
@@ -1593,11 +1689,10 @@ const App = () => {
             <div className="hidden items-center gap-3 md:flex">
               <ScheduleButton
                 onClick={() => setIsScheduleOpen(true)}
-                className="inline-flex items-center gap-2 rounded-lg bg-[#7C3AED] px-4 py-2 font-semibold text-white transition hover:opacity-90"
+                className="inline-flex items-center gap-2 whitespace-nowrap rounded-lg bg-[#7C3AED] px-3 py-2 text-sm font-semibold text-white transition hover:opacity-90"
               >
                 <>
-                  <i className="fa-solid fa-calendar-check"></i> Agendar
-                  demonstração
+                  <i className="fa-solid fa-calendar-check"></i> Agendar demo
                 </>
               </ScheduleButton>
               <WhatsAppButton
@@ -1646,6 +1741,27 @@ const App = () => {
 
       <div className="h-16"></div>
 
+      <div className="section-rail fixed right-5 top-1/2 z-40 hidden -translate-y-1/2 lg:flex">
+        <div className="section-rail-inner">
+          {navItems.map((item) => {
+            const id = item.href.replace("#", "");
+            const isActive = activeSectionId === id;
+
+            return (
+              <a
+                key={item.href}
+                href={item.href}
+                className={`rail-dot ${isActive ? "active" : ""}`}
+                aria-label={`Ir para ${item.label}`}
+                title={item.label}
+              >
+                <span className="rail-tooltip">{item.label}</span>
+              </a>
+            );
+          })}
+        </div>
+      </div>
+
       <main>
         {sections.map((section) => (
           <SectionRenderer key={section.id} section={section} />
@@ -1658,10 +1774,10 @@ const App = () => {
             <div>
               <div className="mb-2 flex items-center gap-3">
                 <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#7C3AED] text-white shadow-lg">
-                  <i className="fa-solid fa-network-wired"></i>
+                  <i className="fa-solid fa-brain"></i>
                 </div>
                 <div className="font-montserrat text-lg font-bold text-white">
-                  Atlas<span className="text-[#7C3AED]">.AI</span>
+                  Atlas<span className="text-[#7C3AED]">.Automate</span>
                 </div>
               </div>
               <p className="max-w-xl text-sm text-gray-400">
@@ -1702,7 +1818,7 @@ const App = () => {
 
           <div className="mt-8 flex flex-col gap-2 border-t border-white/10 pt-6 sm:flex-row sm:justify-between">
             <p className="text-xs text-gray-500">
-              © 2026 Atlas.AI. Todos os direitos reservados.
+              © 2026 Atlas.Automate. Todos os direitos reservados.
             </p>
             <p className="text-xs text-gray-600">
               Este material não contém informações confidenciais por seção

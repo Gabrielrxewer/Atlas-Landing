@@ -1,10 +1,13 @@
 export const navItems = [
   { label: "Problema", href: "#problema" },
   { label: "Valor", href: "#valor" },
+  { label: "Resultados", href: "#resultados" },
   { label: "Fluxo", href: "#fluxo" },
   { label: "Metodologia", href: "#metodologia" },
   { label: "Catálogo", href: "#catalogo-entradas" },
+  { label: "Estimativas", href: "#mapa" },
   { label: "Preço", href: "#preco" },
+  { label: "FAQ", href: "#faq" },
 ];
 
 export const integrationRows = [
